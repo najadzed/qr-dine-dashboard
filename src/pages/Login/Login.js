@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-const API = "http://127.0.0.1:8000/api/";
+const API = "https://qr-dine-backend-xbja.onrender.com/api/";
 
 export default function Login() {
   const navigate = useNavigate();
