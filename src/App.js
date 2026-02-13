@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import KitchenLive from "./pages/Kitchen/KitchenLive";
+import Login from "./pages/Login/Login";
+
+import OwnerLayout from "./pages/Owner/OwnerLayout";
+import Dashboard from "./pages/Owner/Dashboard";
+import MenuManager from "./pages/Owner/MenuManager";
+import TablesManager from "./pages/Owner/TablesManager";
+import OrdersHistory from "./pages/Owner/OrdersHistory";
+
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BrowserRouter>
+      <Routes>
+
+        {/* ✅ Default route → Login */}
+        <Route path="/" element={<Login />} />
+
+        {/* ✅ Kitchen */}
+        <Route
+          path="/kitchen"
+          element={
+            <ProtectedRoute role="kitchen">
+              <KitchenLive />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ✅ Owner Panel with nested pages */}
+        <Route
+          path="/owner"
+          element={
+            <ProtectedRoute role="owner">
+              <OwnerLayout />
+            </ProtectedRoute>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Route index element={<Dashboard />} />
+          <Route path="menu" element={<MenuManager />} />
+          <Route path="tables" element={<TablesManager />} />
+          <Route path="orders" element={<OrdersHistory />} />
+        </Route>
+
+        {/* ✅ Fallback */}
+        <Route path="*" element={<Navigate to="/" />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
