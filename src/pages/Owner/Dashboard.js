@@ -33,13 +33,14 @@ export default function Dashboard() {
       .then(setOrders);
   }, []);
 
+  const todayOrders = useMemo(() => {
   const today = new Date().toDateString();
 
-  const todayOrders = useMemo(() =>
-    orders.filter(o =>
-      new Date(o.created_at).toDateString() === today
-    ), [orders]
+  return orders.filter(o =>
+    new Date(o.created_at).toDateString() === today
   );
+}, [orders]);
+
 
   const totalRevenue = useMemo(() =>
     orders.reduce((sum, o) => sum + o.total_price, 0),

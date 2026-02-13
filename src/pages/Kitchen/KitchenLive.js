@@ -39,7 +39,6 @@ function KitchenDashboard() {
     console.log("❌ No token found, WebSocket not connecting");
     return;
   }
-
   const socket = new WebSocket(
     `wss://qr-dine-backend-xbja.onrender.com/ws/orders/?token=${token}`
   );
