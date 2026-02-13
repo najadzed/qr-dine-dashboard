@@ -3,8 +3,7 @@ import "./styles.css";
 
 import { authFetch } from "../../api";
 const token = localStorage.getItem("token");
-const WS = `wss://qr-dine-backend-xbja.onrender.com/ws/orders/?token=${token}`;
-
+// const WS = `wss://qr-dine-backend-xbja.onrender.com/ws/orders/?token=${token}`;
 
 function KitchenDashboard() {
   const [orders, setOrders] = useState([]);
